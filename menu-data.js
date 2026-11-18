@@ -81,18 +81,6 @@ const menuItems = [
     "category": "Bowls & Salads"
   },
   {
-    "name": "Lobster Roll",
-    "description": "Hot Maine Lobster on toasted buttered Brioche roll",
-    "price": "$29.99",
-    "category": "Seafood"
-  },
-  {
-    "name": "The Reefer Cheesesteak",
-    "description": "",
-    "price": "$14.95",
-    "category": "Sandwiches"
-  },
-  {
     "name": "Mac And Cheese Bowl",
     "description": "",
     "price": "$13.99",
