@@ -43,18 +43,6 @@ const menuItems = [
     "image": "assets/item-100000025702575689_1678541292.jpg"
   },
   {
-    "name": "Lobster Roll",
-    "description": "Hot Maine Lobster on toasted buttered Brioche roll",
-    "price": "$29.99",
-    "category": "Seafood"
-  },
-  {
-    "name": "The Reefer Cheesteak",
-    "description": "",
-    "price": "$14.95",
-    "category": "Sandwiches"
-  },
-  {
     "name": "Power Bowl",
     "description": "Chicken, two fried eggs over brown rice, spinach, avocado, and black beans.",
     "price": "$13.95",
@@ -91,6 +79,18 @@ const menuItems = [
     "description": "Fresh romaine lettuce with tomatoes, corn, cucumbers and grilled chicken. Comes with ranch dressing on the side.",
     "price": "$14.99",
     "category": "Bowls & Salads"
+  },
+  {
+    "name": "Lobster Roll",
+    "description": "Hot Maine Lobster on toasted buttered Brioche roll",
+    "price": "$29.99",
+    "category": "Seafood"
+  },
+  {
+    "name": "The Reefer Cheesesteak",
+    "description": "",
+    "price": "$14.95",
+    "category": "Sandwiches"
   },
   {
     "name": "Mac And Cheese Bowl",
