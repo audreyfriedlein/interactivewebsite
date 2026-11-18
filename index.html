@@ -14,7 +14,7 @@
   <p class="disclaimer">This website was created for educational purposes only and does not represent or reflect the official website of the business.</p>
   <header class="header">
     <div class="wrap header-inner">
-      <a href="#top" class="brand"><img src="assets/logo.png" width="65" height="65" alt="The Reef Shack"><span>The Reef<br>Shack</span></a>
+      <a href="#top" class="brand" aria-label="The Reef Shack, back to top"><img src="assets/logo.png" width="65" height="65" alt=""><span>The Reef<br>Shack</span></a>
       <nav aria-label="Main navigation">
         <a href="#menu">Menu</a>
         <a href="#visit">Visit Us</a>
@@ -25,13 +25,15 @@
   <main>
     <section class="hero" aria-labelledby="welcome">
       <div class="wrap hero-inner">
+        <button type="button" id="hero-logo" class="hero-logo" aria-label="Replay The Reef Shack logo animation">
+          <img class="logo-pop" src="assets/logo.png" width="450" height="450" alt="The Reef Shack" fetchpriority="high">
+        </button>
         <div class="hero-copy">
           <p class="location">FAIRFIELD, CONNECTICUT</p>
           <h1 id="welcome">Good food.<br>Good company.</h1>
           <p>Meet up on Reef Road for breakfast, a bite between classes, or dinner with the family.</p>
           <a class="button button-red" href="#menu">Explore the menu <span aria-hidden="true">↓</span></a>
         </div>
-        <img class="hero-photo" src="assets/hero.webp" alt="The Reef Shack's cheesesteak with melted cheese and sautéed onions" width="1500" height="748" fetchpriority="high">
       </div>
     </section>
     <section id="menu" class="wrap menu" aria-labelledby="menu-title">

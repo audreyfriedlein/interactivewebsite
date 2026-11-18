@@ -5,6 +5,10 @@ const count = document.querySelector('#result-count');
 const empty = document.querySelector('#empty');
 const more = document.querySelector('#more');
 const dialog = document.querySelector('#dish-dialog');
+const logo = document.querySelector('#hero-logo img');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const descriptionFor = item => item.description || 'No description listed on Toast.';
+let resultFade;
 const pageSize = 12;
 const allDishes = 'All dishes';
 const categories = [allDishes, 'Breakfast', 'Bowls & Salads', 'Seafood', 'Sandwiches', 'Sides & Snacks', 'Kids', 'Specials'];
@@ -20,24 +24,26 @@ function element(tag, className, content = '') {
 }
 
 function makeMedia(item, isDetail = false) {
-  const placeholder = element('span', 'media', 'Photo unavailable');
-  if (!item.image) return placeholder;
-
   const photo = element('img', 'media');
   photo.alt = isDetail ? item.name : '';
   photo.loading = isDetail ? 'eager' : 'lazy';
-  photo.addEventListener('error', () => photo.replaceWith(placeholder), { once: true });
   photo.src = item.image;
   return photo;
 }
 
 function openDish(item, card) {
   activeCard = card;
-  document.querySelector('#dish-media').replaceChildren(makeMedia(item, true));
+  const media = document.querySelector('#dish-media');
+  media.replaceChildren();
+  if (item.image) {
+    const photo = makeMedia(item, true);
+    photo.addEventListener('error', () => photo.remove(), { once: true });
+    media.append(photo);
+  }
   document.querySelector('#dish-category').textContent = item.category;
   document.querySelector('#dish-name').textContent = item.name;
   document.querySelector('#dish-price').textContent = item.price === 'See Toast' ? 'See Toast for pricing' : item.price;
-  document.querySelector('#dish-description').textContent = item.description || 'No description listed on Toast.';
+  document.querySelector('#dish-description').textContent = descriptionFor(item);
   dialog.showModal();
 }
 
@@ -51,7 +57,21 @@ function makeCard(item) {
   const line = element('span', 'card-line');
   line.append(element('span', '', item.name), element('span', 'price', item.price));
   copy.append(element('span', 'card-category', item.category), line);
-  card.append(makeMedia(item), copy);
+  function showDescription() {
+    card.classList.add('card-text');
+    copy.append(element('span', 'card-description', descriptionFor(item)));
+  }
+  if (item.image) {
+    const photo = makeMedia(item);
+    photo.addEventListener('error', () => {
+      photo.remove();
+      showDescription();
+    }, { once: true });
+    card.append(photo);
+  } else {
+    showDescription();
+  }
+  card.append(copy);
   card.addEventListener('click', () => openDish(item, card));
   listItem.append(card);
   return listItem;
@@ -61,7 +81,7 @@ function normalize(value) {
   return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 }
 
-function render({ append = false } = {}) {
+function render({ append = false, animate = true } = {}) {
   const terms = normalize(search.value).split(/\s+/);
   const matches = menuItems.filter(item => {
     const text = normalize([item.name, item.category, item.description].join(' '));
@@ -79,6 +99,13 @@ function render({ append = false } = {}) {
   empty.hidden = matches.length !== 0;
   more.hidden = matches.length <= visibleLimit;
   if (append) cards[0]?.querySelector('button').focus();
+  resultFade?.cancel();
+  if (animate && !reduceMotion.matches) {
+    resultFade = (matches.length ? grid : empty).animate(
+      [{ opacity: 0.65 }, { opacity: 1 }],
+      { duration: 170, easing: 'ease-out' }
+    );
+  }
 }
 
 for (const label of categories) {
@@ -104,4 +131,14 @@ more.addEventListener('click', () => {
   render({ append: true });
 });
 dialog.addEventListener('close', () => activeCard?.focus());
-render();
+document.querySelector('#hero-logo').addEventListener('click', () => {
+  if (reduceMotion.matches) return;
+  logo.classList.remove('logo-pop');
+  // Flush the style change so adding the class restarts the animation.
+  void logo.offsetWidth;
+  logo.classList.add('logo-pop');
+});
+reduceMotion.addEventListener('change', event => {
+  if (event.matches) resultFade?.cancel();
+});
+render({ animate: false });
