@@ -149,3 +149,35 @@ dialog img.media { object-fit: contain; background: #e7edf4; }
   .card { transition: none; }
   .card:hover { transform: none; }
 }
+
+.wave-section { position: relative; isolation: isolate; }
+.wave-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 180'%3E%3Cpath fill='none' stroke='%23bc2136' stroke-width='20' d='M0 72Q100 0 200 72T400 72T600 72T800 72'/%3E%3Cpath fill='none' stroke='%23ffffff' stroke-width='18' d='M0 105Q100 33 200 105T400 105T600 105T800 105'/%3E%3Cpath fill='none' stroke='%235d92da' stroke-width='24' d='M0 140Q100 68 200 140T400 140T600 140T800 140'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 800px 180px;
+  background-position: var(--wave-offset, 0px) bottom;
+  opacity: .22;
+}
+#menu { background: #fff; }
+#menu::before { background-repeat: repeat; opacity: .12; }
+.is-revealing { animation: scroll-in 320ms ease-out var(--reveal-delay, 0ms) backwards; }
+.grid > li:focus-within { animation: none; }
+@keyframes scroll-in {
+  from { opacity: .55; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+dialog[open] { animation: dialog-pop 200ms ease-out; }
+@keyframes dialog-pop {
+  from { opacity: .65; transform: scale(.96); }
+  70% { transform: scale(1.008); }
+  to { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wave-section::before { background-position-x: 0; }
+  .is-revealing, dialog[open] { animation: none; }
+}

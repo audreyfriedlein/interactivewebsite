@@ -23,7 +23,7 @@
     </div>
   </header>
   <main>
-    <section class="hero" aria-labelledby="welcome">
+    <section class="hero wave-section" aria-labelledby="welcome">
       <div class="wrap hero-inner">
         <button type="button" id="hero-logo" class="hero-logo" aria-label="Replay The Reef Shack logo animation">
           <img class="logo-pop" src="assets/logo.png" width="450" height="450" alt="The Reef Shack" fetchpriority="high">
@@ -36,25 +36,27 @@
         </div>
       </div>
     </section>
-    <section id="menu" class="wrap menu" aria-labelledby="menu-title">
-      <div class="menu-heading">
-        <div><h2 id="menu-title">The Menu</h2><p>Find a dish and select it for details.</p></div>
-        <label class="search" for="menu-search">Search the menu
-          <input id="menu-search" type="search" placeholder="Try lobster or pancakes" autocomplete="off">
-        </label>
+    <section id="menu" class="wave-section" aria-labelledby="menu-title">
+      <div class="wrap menu">
+        <div class="menu-heading">
+          <div><h2 id="menu-title">The Menu</h2><p>Find a dish and select it for details.</p></div>
+          <label class="search" for="menu-search">Search the menu
+            <input id="menu-search" type="search" placeholder="Try lobster or pancakes" autocomplete="off">
+          </label>
+        </div>
+        <div id="filters" class="filters" role="group" aria-label="Menu category"></div>
+        <p id="result-count" class="result-count" role="status"></p>
+        <ul id="menu-grid" class="grid"></ul>
+        <p id="empty" hidden>No dishes match your search. Try another term or choose All dishes.</p>
+        <noscript><p>The interactive menu requires JavaScript. Use the Toast link for the full menu.</p></noscript>
+        <div class="menu-actions">
+          <button type="button" class="button button-outline" id="more" hidden>Show more dishes</button>
+          <a class="button button-red" href="https://thereefshack.toast.site/order">View Full Menu on Toast ↗</a>
+        </div>
+        <p class="menu-note">Check Toast for current prices and availability.</p>
       </div>
-      <div id="filters" class="filters" role="group" aria-label="Menu category"></div>
-      <p id="result-count" class="result-count" role="status"></p>
-      <ul id="menu-grid" class="grid"></ul>
-      <p id="empty" hidden>No dishes match your search. Try another term or choose All dishes.</p>
-      <noscript><p>The interactive menu requires JavaScript. Use the Toast link for the full menu.</p></noscript>
-      <div class="menu-actions">
-        <button type="button" class="button button-outline" id="more" hidden>Show more dishes</button>
-        <a class="button button-red" href="https://thereefshack.toast.site/order">View Full Menu on Toast ↗</a>
-      </div>
-      <p class="menu-note">Check Toast for current prices and availability.</p>
     </section>
-    <section id="visit" class="visit" aria-labelledby="visit-title">
+    <section id="visit" class="visit wave-section" aria-labelledby="visit-title">
       <div class="wrap visit-inner">
         <div><h2 id="visit-title">Visit Us</h2><p>Bring a friend after class or get the family together for a weekday meal at the Shack.</p></div>
         <div class="visit-details">
